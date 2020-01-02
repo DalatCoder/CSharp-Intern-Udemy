@@ -41,7 +41,7 @@ namespace CastingClass
             text.FontSize = 13;
             // shape is actually text at runtime
             // downcasting
-            if (shape is Text) { var anotherText = (Text)shape; }
+            if (shape is Text) { var anotherText_1 = (Text)shape; }
 
             var anotherText = shape as Text;
             if (anotherText != null)
@@ -50,6 +50,9 @@ namespace CastingClass
                 anotherText.FontSize = 11; // text and another text have the same reference
                 Console.WriteLine(text.FontSize);
             }
+
+            object intObj = 10;
+            Console.WriteLine(intObj);
         }
     }
 }
