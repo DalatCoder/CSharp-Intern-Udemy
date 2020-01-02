@@ -6,8 +6,10 @@ namespace CSharp_Intern
     {
         static void Main(string[] args)
         {
-            var hieu = new Person(new DateTime(2000, 03, 11));
-            Console.WriteLine($"Your age is: {hieu.Age}");
+            var cookie = new HttpCookie();
+            cookie["name"] = "Hieu";
+            cookie["age"] = 19.ToString();
+            Console.WriteLine(cookie["name"]);
         }
     }
 }
