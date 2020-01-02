@@ -44,8 +44,8 @@ namespace LearnComposition
     {
         static void Main(string[] args)
         {
-            var dbMigrator = new DbMigrator(new Logger());
-            var installer = new Installer(new Logger());
+            var dbMigrator = new DbMigrator(logger: new Logger());
+            var installer = new Installer(logger: new Logger());
 
             dbMigrator.Migrate();
             installer.Install();
