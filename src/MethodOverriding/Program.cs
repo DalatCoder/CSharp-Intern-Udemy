@@ -6,7 +6,7 @@ namespace MethodOverriding
     {
         static void Main(string[] args)
         {
-            var shapes = new List<Shape>()
+            var shapes = new List<IShape>()
             {
                 new Circle(),
                 new Rectangle(),

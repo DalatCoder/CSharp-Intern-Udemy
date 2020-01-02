@@ -5,7 +5,7 @@ namespace MethodOverriding
 {
     public class Canvas
     {
-        public void DrawShapes(List<Shape> shapes)
+        public void DrawShapes(List<IShape> shapes)
         {
             foreach (var shape in shapes)
             {
