@@ -3,45 +3,30 @@ using System.Threading;
 
 namespace LearnLambdaExpression
 {
-    public class TestDelegate
-    {
-        public int Test(Func<int, int, int> handler, int num1, int num2)
-        {
-            return handler(num1, num2);
-        }
-    }
 
     class Program
     {
-        static int Sum(int a, int b)
-        {
-            return a + b;
-        }
-
-        static int Square(int number)
-        {
-            return number * number;
-        }
-
         static void Main(string[] args)
         {
-            // LogMessage("Hello world", Console.WriteLine);
-            // SetTimeout("Hello world after 1 second", Console.WriteLine, 1000);
-
-            const int factor = 5;
-            Func<int, int> multiplier = n => n * factor;
-
-            Console.WriteLine(multiplier(2));
-
-            Func<int, int> square = number => number * number;
-            LogMessage(square(5).ToString(), Console.WriteLine);
-            SetTimeout(square(5).ToString(), Console.WriteLine, 3000);
-
-            int a = 1, b = 2;
-            Console.WriteLine(new TestDelegate().Test((a, b) =>
+            var books = new BookRepository().GetBooks();
+            var cheapBooks = books.FindAll(IsCheaperThan10Dollars);
+            foreach (var book in cheapBooks)
             {
-                return a + b;
-            }, a, b));
+                Console.WriteLine(book);
+            }
+
+            // Get books that cheaper than $10 using lambda expression
+            var cheapBooksLambda = books.FindAll(el => el.Price < 10);
+            foreach (var book in cheapBooksLambda)
+            {
+                Console.WriteLine(book);
+            }
+        }
+
+        // Predicate method
+        static bool IsCheaperThan10Dollars(Book book)
+        {
+            return book.Price < 10;
         }
 
         static void LogMessage(string message, Action<string> logger)
