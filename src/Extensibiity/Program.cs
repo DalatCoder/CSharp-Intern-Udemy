@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var dbMigrator = new DbMigrator(new FileLogger("log.txt"));
+            var dbMigrator = new DbMigrator(new ConsoleLogger());
             dbMigrator.Mirgrate();
         }
     }
