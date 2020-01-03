@@ -1,12 +1,17 @@
-﻿using System;
-
-namespace WorkflowEngine
+﻿namespace WorkflowEngine
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var videoProcessorWorkflow = new VideoProcessorWorkflow();
+            videoProcessorWorkflow.Add(new UploadVideoToCloud());
+            videoProcessorWorkflow.Add(new CallThirdPartyService());
+            videoProcessorWorkflow.Add(new MailNotification());
+            videoProcessorWorkflow.Add(new ChangeStatus());
+
+            var engine = new WorkflowEngine();
+            engine.Run(videoProcessorWorkflow);
         }
     }
 }
