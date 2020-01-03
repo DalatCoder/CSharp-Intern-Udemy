@@ -2,34 +2,6 @@
 
 namespace LearnDelegates
 {
-    public class Photo
-    {
-        public static Photo Load(string path)
-        {
-            return new Photo();
-        }
-
-        public void Save()
-        {
-            Console.WriteLine("Saving photo...");
-        }
-
-    }
-
-    public class PhotoProcessor
-    {
-        public delegate void PhotoFilterHandler(Photo photo);
-
-        public void Process(string path, PhotoFilterHandler filterHandler)
-        {
-            var photo = Photo.Load(path);
-
-            filterHandler(photo);
-
-            photo.Save();
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
@@ -40,8 +12,14 @@ namespace LearnDelegates
             PhotoProcessor.PhotoFilterHandler filterHandler = filters.ApplyBrightness;
             filterHandler += filters.ApplyContrast;
             filterHandler += filters.Resize;
+            filterHandler += RemoveRedEyeFilter;
 
             processor.Process("photo.jpg", filterHandler);
+        }
+
+        static void RemoveRedEyeFilter(Photo photo)
+        {
+            Console.WriteLine("Removing red eye...");
         }
     }
 }
