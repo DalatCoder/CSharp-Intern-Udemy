@@ -2,6 +2,8 @@
 
 namespace LearnDelegates
 {
+    public delegate void PhotoFilterHandler(Photo photo);
+
     public class Photo
     {
         public static Photo Load(string path)
@@ -18,34 +20,13 @@ namespace LearnDelegates
 
     public class PhotoProcessor
     {
-        public void Process(string path)
+        public void Process(string path, PhotoFilterHandler filterHandler)
         {
             var photo = Photo.Load(path);
 
-            var filter = new PhotoFilters();
-            filter.ApplyBrightness(photo);
-            filter.ApplyContrast(photo);
-            filter.Resize(photo);
+            filterHandler(photo);
 
             photo.Save();
-        }
-    }
-
-    internal class PhotoFilters
-    {
-        public void ApplyBrightness(Photo photo)
-        {
-            Console.WriteLine("Apply brightness");
-        }
-
-        public void ApplyContrast(Photo photo)
-        {
-            Console.WriteLine("Apply contrast");
-        }
-
-        public void Resize(Photo photo)
-        {
-            Console.WriteLine("Resize");
         }
     }
 
@@ -53,8 +34,13 @@ namespace LearnDelegates
     {
         static void Main(string[] args)
         {
+            var photo = new Photo();
             var processor = new PhotoProcessor();
-            processor.Process("");
+            var photoFilters = new PhotoFilters();
+
+            processor.Process("photo.jpg", photoFilters.ApplyBrightness);
+            processor.Process("photo.jpg", photoFilters.ApplyContrast);
+            processor.Process("photo.jpg", photoFilters.Resize);
         }
     }
 }
