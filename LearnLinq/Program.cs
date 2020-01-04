@@ -68,6 +68,11 @@ namespace LearnLinq
             {
                 System.Console.WriteLine(book);
             }
+
+            // Some more extension methods
+            System.Console.WriteLine(books.Single(b => b.Title.Equals("ASP.NET MVC")));
+            System.Console.WriteLine(books.Sum(el => el.Price));
+            System.Console.WriteLine(books.Skip(2).Take(3)); // pagination
         }
     }
 }
